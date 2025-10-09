@@ -157,7 +157,7 @@
 また今回授業回数が少ないため, 適宜オンライン教材を活用する可能性もあります. 
 
 - 第1回 (2025/10/02). [第1回授業板書](https://masataka123.github.io/2025_winter_linear_algebra/material/1_授業板書.pdf)
-- 第2回 (2025/10/09). 
+- 第2回 (2025/10/09). [第2回授業板書](https://masataka123.github.io/2025_winter_linear_algebra/material/2_授業板書.pdf)
 - 第3回 (2025/10/16). 
 - 第4回 (2025/10/23). 
 - 第5回 (2025/10/30). 
