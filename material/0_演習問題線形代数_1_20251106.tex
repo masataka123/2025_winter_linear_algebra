@@ -1,0 +1,463 @@
+%\documentclass[dvipdfmx,a4paper,12pt]{amsart}
+\documentclass[dvipdfmx,a4paper,12pt]{article} % titleとe-mailをコメントアウトする．
+
+%%% Packages %%%
+\setlength{\lineskip}{0pt}
+
+% --- 和文フォント設定 (ゴシックを使うなら) --- amsartを使う時はコメントアウト
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\usepackage{otf}          % min10を避けるため
+\usepackage{pxrubrica}    % 和文ルビ
+
+
+% --- 基本パッケージ ---
+\usepackage{graphicx}
+\usepackage[all]{xy}
+\usepackage{wrapfig}
+\usepackage{pgfplots}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{latexsym}
+\usepackage{setspace}
+\usepackage{multirow}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{comment}
+\usepackage[normalem]{ulem} % \emph の下線化を抑止（cancelと共存）
+\usepackage{url}
+
+% --- 数学関連 ---
+\usepackage{amsmath,amssymb,amsthm,amsfonts,mathtools}
+\usepackage{amscd,dsfont,bigdelim,braket,physics,mathrsfs,bm}
+
+% --- 新規追加 ---
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable, skins, theorems}
+
+% --- showkeys（常に表示） ---
+%\usepackage{showkeys}
+%\renewcommand*{\showkeyslabelformat}[1]{%
+ % \fbox{\parbox{1.6cm}{\normalfont\tiny\sffamily#1\vspace{6mm}}}%
+%}
+
+% --- hyperrefは最後に読み込む ---
+\usepackage[dvipdfmx,colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue]{hyperref}
+
+%%% レイアウト調整（geometryに統一） %%%
+\usepackage[
+  top=20mm,        % 上余白
+  bottom=30mm,     % 下余白
+  left=25mm,       % 左余白
+  right=25mm,      % 右余白
+  headheight=12pt, % ヘッダー高さ
+  headsep=10mm,    % ヘッダーと本文の間
+  footskip=32pt,   % 本文とフッターの距離
+  includehead,
+  includefoot
+]{geometry}
+
+%%% 行間調整 %%%
+\usepackage{setspace}
+\setstretch{1.2}
+
+% --- 段落設定 ---
+%\setlength{\parskip}{3pt}
+%\setlength{\parindent}{0pt}
+
+
+%%% 追加（重複なし）パッケージ・設定 %%%
+
+% --- 目次の体裁調整 ---
+\usepackage{tocloft}
+\renewcommand{\contentsname}{目次} % 日本語化
+\setlength{\cftbeforesecskip}{0pt}
+\setlength{\cftbeforesubsecskip}{0pt}
+\setlength{\cftbeforesubsubsecskip}{0pt}
+
+% --- セクション見出しの体裁調整 ---
+%\usepackage{titlesec}
+%\titleformat*{\section}{\Large\bfseries}
+%\titleformat*{\subsection}{\large\bfseries}
+%\titlespacing*{\section}{0pt}{1.5ex plus .2ex minus .2ex}{0.8ex plus .1ex}
+%\titlespacing*{\subsection}{0pt}{1.0ex plus .2ex minus .2ex}{0.5ex plus .1ex}
+
+% --- ヘッダー／フッター設定 ---
+%\usepackage{fancyhdr}
+%\pagestyle{fancy}
+%\fancyhf{}
+%\rhead{岩井 雅崇}
+%\lhead{大阪大学 数学専攻}
+%\cfoot{\thepage}
+
+
+
+% -- enumerate, itemize行間設定
+\setlist[itemize]{itemsep=3pt, parsep=0pt}
+\setlist[enumerate]{itemsep=3pt, parsep=0pt}
+
+% --- TikZ 設定 ---
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, fit, calc, backgrounds}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+% --- footnote がページをまたがない設定 ---
+\interfootnotelinepenalty=10000
+
+% --- 目次に表示する階層の深さ ---
+\setcounter{tocdepth}{2}
+
+% --- 日本語目次---
+\usepackage{pxjahyper}
+
+%%% Theorem 環境 %%%
+\theoremstyle{definition}
+\newtheorem{thm}{定理}
+\newtheorem{lem}[thm]{補題}
+\newtheorem{prop}[thm]{命題}
+\newtheorem{cor}[thm]{系}
+\newtheorem{claim}[thm]{主張}
+\newtheorem{dfn}[thm]{定義}
+\newtheorem{rem}[thm]{注意}
+\newtheorem{exa}[thm]{例}
+\newtheorem{conj}[thm]{予想} % 和文版
+\newtheorem{prob}[thm]{問題}
+\newtheorem{rema}[thm]{補足}
+\newtheorem{dfnthm}[thm]{定義・定理}
+\newtheorem{ques}[thm]{問題}
+\newtheorem{suma}[thm]{まとめ}
+
+%%%%%%定理などを英語で使うとき%%%%%%%%%%%
+\begin{comment}
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{theo}[thm]{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem*{mainthm}{Theorem}
+\newtheorem{deflem}[thm]{Definition-Lemma}
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{definition} 
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{propdefn}[thm]{Proposition-Definition} 
+\newtheorem{lemdefn}[thm]{Lemma-Definition} 
+\newtheorem{thmdefn}[thm]{Theorem-Definition} 
+\newtheorem{eg}[thm]{Example} 
+\newtheorem{ex}[thm]{Example} 
+\newtheorem{exa}[thm]{Example} 
+\newtheorem{ques}[thm]{Question}
+\newtheorem{remin}[thm]{Reminder}
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{setup}[thm]{Setup}
+\newtheorem{obs}[thm]{Observation}
+\newtheorem{notation}[thm]{Notation}
+\newtheorem{cl}{Claim}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{assup}[thm]{Assumption}
+\newtheorem{step}{Step}
+\newtheorem*{clproof}{Proof of Claim}
+\newtheorem{cln}[thm]{Claim}
+\newtheorem*{ack}{Acknowledgements} 
+\numberwithin{equation}{section}
+\newtheorem{case}{Case}
+\end{comment}
+%%%%%%%%%%%%%%%%%
+
+%%% 新規追加コマンド（逆三角関数など） %%%
+\newcommand{\Sin}{\text{Sin}^{-1}} 
+\newcommand{\Cos}{\text{Cos}^{-1}} 
+\newcommand{\Tan}{\text{Tan}^{-1}} 
+\newcommand{\invsin}{\text{Sin}^{-1}} 
+\newcommand{\invcos}{\text{Cos}^{-1}} 
+\newcommand{\invtan}{\text{Tan}^{-1}} 
+\newcommand{\Area}{S}
+\newcommand{\vol}{\text{Vol}}
+\newcommand{\maru}[1]{\raise0.2ex\hbox{\textcircled{\tiny{#1}}}}
+\newcommand{\sgn}{{\rm sgn}}
+
+%%% 既存のコマンド群（統合済み） %%%
+\newcommand{\rk}[0]{\operatorname{rk}}
+\newcommand{\supp}[0]{\operatorname{Supp}}
+\newcommand{\Rad}[0]{\operatorname{Rad}}
+\newcommand{\Sha}[0]{\operatorname{Sha}}
+\newcommand{\sha}[0]{\operatorname{sha}}
+\newcommand{\eend}[0]{\operatorname{End}}
+\newcommand{\codim}[0]{\operatorname{codim}}
+\newcommand{\nd}[0]{\operatorname{nd}}
+\renewcommand{\rank}[0]{\operatorname{rank}}
+\newcommand{\degree}[0]{\operatorname{deg}}
+\newcommand{\Exc}[0]{\operatorname{Exc}}
+\newcommand{\pr}{{\rm pr}}
+\newcommand{\id}{{\rm id}}
+\newcommand{\Sym}{{\rm Sym}}
+\newcommand{\End}[0]{\operatorname{End}}
+\newcommand{\Coker}[0]{\operatorname{Coker}}
+
+\newcommand{\Supp}{{\rm Supp}}
+\newcommand{\Hom}[0]{\mathscr{H}\!\textit{om}}
+\newcommand{\Ext}[0]{\mathscr{E}\!\textit{xt}}
+\newcommand{\GL}[0]{\operatorname{GL}}
+\newcommand{\SheafHom[1]}{\mathscr{H}\!\!\!\text{\calligra om}_{\,{#1}}}
+\newcommand{\PGL}[0]{\mathbb{P}\GL(r,\C)}
+
+\newcommand{\Alb}{{\rm Alb}}
+\newcommand{\verti}{{\rm vert}}
+\newcommand{\hor}{{\rm hor}}
+\newcommand{\univ}{{\rm univ}}
+\newcommand{\Tor}{{\rm tor}}
+\newcommand{\shaf}{\mathrm{sha}}
+\newcommand{\Shaf}{\mathrm{Sha}}
+\newcommand{\reg}{{\rm{reg}}}
+\newcommand{\sing}{{\rm{sing}}}
+\newcommand{\qt}{{\rm{qt}}}
+\newcommand\sO{{\mathcal O}}
+\newcommand{\Div}[0]{\operatorname{div}}
+\newcommand{\ddbar}{dd^c}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\deldel}{\sqrt{-1}\partial \overline{\partial}}
+\newcommand{\dbar}{\overline{\partial}}
+\newcommand{\I}[1]{\mathcal{I}(#1)}
+\newcommand{\Aut}[1]{\mathrm{Aut}(#1)}
+\newcommand{\Ker}[1]{\mathrm{Ker}(#1)}
+\newcommand{\Image}[1]{\mathrm{Im}(#1)}
+\DeclareMathOperator{\Ric}{Ric}
+\DeclareMathOperator{\Vol}{Vol}
+ \newcommand{\pdrv}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\drv}[2]{\frac{d #1}{d#2}}
+ \newcommand{\ppdrv}[3]{\frac{\partial #1}{\partial #2 \partial #3}}
+\newcommand{\underalign}[2]{\quad \underset{\mathclap{\strut #1}}{#2}\quad}
+\newcommand{\polar}{\beta}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{Z}_+} % --- 旧定義を優先
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\mP}{\mathbb{P}}
+\newcommand{\mO}{\mathcal{O}}
+\newcommand{\B}{\mathds{B}}
+\newcommand{\tl}{\hspace{-0.8ex}<\hspace{-0.8ex}}
+\renewcommand{\tr}{\hspace{-0.8ex}>}
+
+\newcommand{\xb}[1]{\textcolor{blue}{#1}}
+\newcommand{\xr}[1]{\textcolor{red}{#1}}
+\newcommand{\xm}[1]{\textcolor{magenta}{#1}}
+
+\newcommand{\illegible}[1]{\textcolor{red}{[ILLEGIBLE: #1]}}
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+\baselineskip = 15pt
+\footskip = 32pt%ここから本文．
+
+\begin{document}
+\pagestyle{empty}
+
+
+
+\begin{center}
+{\Large 演習問題 2025年11月6日(木)} \\
+
+%\vspace{5pt}
+%{ \large 提出締め切り 2024年月日(火) 15時10分00秒 (日本標準時刻)}
+\end{center}
+
+%\vspace{2pt}
+%\begin{flushleft}
+%{ \large \underline{学籍番号: \hspace{4cm} 名前  \hspace{8cm} } }
+%\end{flushleft}
+
+\begin{center}
+ {\large 下の問題を解け. なお解答は配布した解答用紙に解答すること.}
+  \end{center}
+ ただし解答に関しては答えのみならず, 答えを導出する過程をきちんと記すこと. 
+ また解答用紙は1人1枚以上提出すること.
+  
+  \vspace{11pt}
+ 
+   \begin{enumerate}[label={\large \textbf{第}\arabic*\textbf{問}.}]
+\item 行列$A$を次で定めるとき, 以下の問いに答えよ.
+ $$
+ A = 
+ \begin{pmatrix}
+ 2 &4&-3&8 \\
+ 3&-1&2&-5 \\
+  18&0&2&12
+ \end{pmatrix}
+ $$
+ \begin{enumerate}[label=(\arabic*)]
+   \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+ \item $A$は何行何列の行列か?
+ \item $A$の$(3,2)$成分を答えよ.
+  \item $A$の第2行を答えよ.
+ \item $A$の第3列を答えよ.
+ \end{enumerate}
+ 
+\item  次の行列の計算をせよ.
+
+ \begin{enumerate}[label=(\arabic*)]
+   \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+\item 
+$
+ \begin{pmatrix} 5 & -2 \\ 0 & 1 \end{pmatrix}-  3 \begin{pmatrix} 3 & 4 \\ 1 & -2 \end{pmatrix}
+$
+\item $
+\begin{pmatrix} 2 & 0 \\ -1 & 3 \end{pmatrix}\begin{pmatrix} 1 & 2 \\ 0 & -1 \end{pmatrix}
++  \begin{pmatrix} 3 & 1 \\ 2 & 2 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 2 & -1 \end{pmatrix}
+$
+\item $
+\begin{pmatrix} 5 & 0 \\ 0 & 2 \end{pmatrix}^3 + 3 \begin{pmatrix} 5 & 1 \\ 1 & 2 \end{pmatrix}
+$
+ \end{enumerate}
+ 
+\item 次の問いに答えよ.
+ \begin{enumerate}[label=(\arabic*)]
+   \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+\item $ \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}$の行列式を求めよ.
+\item $ \begin{pmatrix} 2 & 1 \\ -5& 3 \end{pmatrix}$の逆行列を求めよ
+\item $ \begin{pmatrix} 100 & 99 \\ 99 & 100\end{pmatrix}$の逆行列を求めよ
+ \end{enumerate}
+ 
+\item   
+ \begin{enumerate}[label=(\arabic*)]
+   \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+\item 
+$
+A=\begin{pmatrix} 4 & 2 \\ 0 & 3 \end{pmatrix}
+$とする. $A$を対角化せよ. また$A^n$を$n$を用いて表せ. 
+\item $
+B=\begin{pmatrix} 13 & -30 \\ 5 & -12 \end{pmatrix}
+$とする. $B$を対角化せよ. また$B^n$を$n$を用いて表せ. 
+ \end{enumerate}
+ 
+ \begin{flushright}
+ {\Large 問題は裏面に続く}
+ \end{flushright}
+
+ \newpage
+ 
+\item   $2 \times 2$行列
+$
+A=\begin{pmatrix}
+a& b \\
+c& d \\
+\end{pmatrix}
+$とする. 
+ $$
+\begin{array}{ccccc}
+f_A: &\R^2& \rightarrow & \R^2& \\
+&\begin{pmatrix}
+x \\ y
+ \end{pmatrix} & \longmapsto & 
+A
+\begin{pmatrix}
+x \\ y
+ \end{pmatrix}  = 
+ \begin{pmatrix}
+ax + by \\ cx + dy
+ \end{pmatrix}
+ &
+\end{array}
+$$
+とおき, $A$を$f_A$に対応する行列という. 次の問いに答えよ. 
+ \begin{enumerate}[label=(\arabic*)]
+   \setlength{\parskip}{0cm} % 段落間
+  \setlength{\itemsep}{0cm} % 項目間
+  %\item 45度反時計回りに回転する1次変換$f: \R^2 \to \R^2$に対応する$2 \times 2$行列を求めよ. 
+%  \item $x$軸に関しての反転(折り返し)を表す1次変換を$g : \R^2 \to \R^2$に対応する$2 \times 2$行列を求めよ.
+  \item 「$x$軸に関しての鏡映(反転)を行い, 135度反時計回りに回転する変換」に対応する$2 \times 2$行列を求めよ.
+  \item 「$x$軸に関しての鏡映(反転)を行い, 135度反時計回りに回転し, さらに$x$軸に関しての鏡映(反転)を行う変換」を$g : \R^2 \to \R^2$とする. $g$は「$\alpha$度反時計回りに回転する変換」と同じである. $\alpha$の値を求めよ. 
+  ただし$0 \leqq \alpha \leqq 360$とする.
+  \end{enumerate}
+
+
+\item 次の行列の計算を行え.
+ 
+(1)
+$
+\begin{pmatrix}
+ 1& 0 & 3\\
+ 4 &-1&3\\
+ 0 & 2& 1\\
+ \end{pmatrix}
+ \begin{pmatrix}
+ 0 &1&-2 \\
+ 7&-5&4\\
+ 1 &0&-2 \\
+ \end{pmatrix}
+ $
+ \quad
+(2)
+$
+\begin{pmatrix}
+ 2 &-1 \\
+ 4 &0 \\
+ 3&-5\\
+ \end{pmatrix}
+ \left\{
+ 2
+ \begin{pmatrix}
+ 0 &1&-2 \\
+ 7&-5&4\\
+ \end{pmatrix}
+ - 3
+  \begin{pmatrix}
+ 1 &-2&6 \\
+ 4&-1&5\\
+ \end{pmatrix}
+\right\}
+ $
+ 
+\item  次の行列$A,B,C,D$を次で定義する.
+ $$
+  A=\begin{pmatrix} %14
+ -1 & 2 &-5  \\
+ \end{pmatrix} 
+ \text{, \,\,} 
+B= \begin{pmatrix} %33
+ 1& 0 & 2\\
+ 0 & 3 & 0\\
+ 4 & 0 & 5 \\
+ \end{pmatrix} %%32
+ \text{, \,\,} 
+ C=
+  \begin{pmatrix}
+ -2 &5 & 3\\
+1 &-3&0  \\
+ \end{pmatrix}
+ \text{, \,\,} 
+ D= \begin{pmatrix} %%41
+ -4\\
+ 3 \\
+ 1
+ \end{pmatrix}
+ $$
+ $AA, AB, AC, AD, BA, BB, BC, BD, CA, CB, CC, CD, DA, DB, DC, DD$の16個の組み合わせのうち, 積が定義されるものを全て求め, その積を計算せよ.
+ 
+\end{enumerate}
+ 
+ \newpage
+ 
+  \begin{center}
+ {\Large 解答用紙}
+% {\Large 演習問題の解答用紙 2024年1月11日(木) } \\
+\end{center}
+
+%\vspace{5pt}
+%{ \large 提出締め切り 2024年月日(火) 15時10分00秒 (日本標準時刻)}
+%\end{center}
+
+%\vspace{2pt}
+\begin{flushleft}
+{ \large \underline{学籍番号: \hspace{4cm} 名前  \hspace{9cm}   }  }
+\end{flushleft}
+ 
+
+ \end{document}
